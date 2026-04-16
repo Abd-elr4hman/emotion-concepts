@@ -265,11 +265,11 @@ emoj-poc/
 ## Implementation Order
 
 ### Phase 1: Extract Emotion Vectors
-1. [ ] Generate emotion stories dataset (or use existing if available)
-2. [ ] Extract activations from stories
-3. [ ] Compute emotion vectors (mean - global mean)
-4. [ ] Project out confounds from neutral corpus
-5. [ ] Save vectors to disk
+1. [x] Generate emotion stories dataset (or use existing if available)
+2. [x] Extract activations from stories
+3. [x] Compute emotion vectors (mean - global mean)
+4. [x] Project out confounds from neutral corpus
+5. [x] Save vectors to disk
 
 ### Phase 2: Scoring & Generation
 6. [ ] Implement `score_token()` function
@@ -277,7 +277,7 @@ emoj-poc/
 8. [ ] Test on simple prompts, verify vectors activate sensibly
 
 ### Phase 3: Visualization
-9. [ ] Static plot of trajectory (matplotlib)
+9. [x] Static plot of trajectory (matplotlib) — heatmap + PCA done
 10. [ ] Live updating plot during generation
 11. [ ] Add token annotations on x-axis
 
@@ -342,6 +342,8 @@ Based on Anthropic's findings on alignment-relevant emotions:
    - May not matter much if activations still capture the emotion
 
 2. **Truncation is acceptable:** Stories cut off at 150 tokens mid-sentence still carry emotional content. The truncation doesn't hurt — the emotion is concentrated in the narrative, not the conclusion.
+
+3. **Manual story curation:** Anthropic hand-picked stories to ensure quality — filtering out ones where the model went off-track (e.g., "angry" story that reads as anxious). For production quality, review a sample per emotion and exclude or regenerate bad ones.
 
 ---
 

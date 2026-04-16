@@ -6,7 +6,19 @@
     "hopeful",
     "satisfied",
     "afraid",
-    "loving"
+    "loving",
+    "angry",
+    "anxious",
+    "frustrated",
+    "guilty",
+    "confident",
+    "grateful",
+    "proud",
+    "playful",
+    "surprised",
+    "reflective",
+    "gloomy",
+    "obstinate"
   ],
   "topics": [
     "a job interview",

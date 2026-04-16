@@ -21,14 +21,30 @@ from tqdm import tqdm
 MODEL_NAME = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Core emotions for alignment (from Anthropic's findings)
+# Emotions for alignment (expanded from Anthropic's findings)
 EMOTIONS = [
+    # Core set (original 6)
     "desperate",
     "calm",
     "hopeful",
     "satisfied",
     "afraid",
     "loving",
+    # Extended set - negative/high arousal
+    "angry",
+    "anxious",
+    "frustrated",
+    "guilty",
+    # Extended set - positive
+    "confident",
+    "grateful",
+    "proud",
+    "playful",
+    # Extended set - mixed/other
+    "surprised",
+    "reflective",
+    "gloomy",
+    "obstinate",
 ]
 
 # Story generation settings

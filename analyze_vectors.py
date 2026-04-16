@@ -57,13 +57,24 @@ def compute_cosine_similarity_matrix(vectors):
 def plot_similarity_heatmap(sim_matrix, emotions, save_path=None):
     """Plot cosine similarity heatmap with hierarchical clustering like Anthropic's figure."""
     import pandas as pd
+    from scipy.cluster.hierarchy import linkage, leaves_list
 
     # Create DataFrame for clustermap
     df = pd.DataFrame(sim_matrix, index=emotions, columns=emotions)
 
-    # Clustermap automatically reorders by similarity
-    g = sns.clustermap(
-        df,
+    # Get clustering order without showing dendrograms
+    linkage_matrix = linkage(sim_matrix, method='average')
+    order = leaves_list(linkage_matrix)
+    ordered_emotions = [emotions[i] for i in order]
+
+    # Reorder dataframe
+    df_ordered = df.loc[ordered_emotions, ordered_emotions]
+
+    # Plot clean heatmap (no dendrograms)
+    fig, ax = plt.subplots(figsize=(12, 10))
+
+    sns.heatmap(
+        df_ordered,
         cmap="RdBu_r",
         center=0,
         vmin=-1,
@@ -71,19 +82,27 @@ def plot_similarity_heatmap(sim_matrix, emotions, save_path=None):
         annot=True,
         fmt=".2f",
         square=True,
-        cbar_kws={"label": "Cosine Similarity"},
-        figsize=(8, 6),
-        dendrogram_ratio=0.15,
+        annot_kws={"size": 9},
+        cbar_kws={
+            "label": "Cosine Similarity",
+            "shrink": 0.8,
+        },
+        ax=ax,
+        linewidths=0.5,
+        linecolor='white',
     )
 
-    g.fig.suptitle("Emotion Vector Similarity\n(hierarchically clustered)", y=1.02)
+    ax.set_title("Emotion Vector Similarity\n(hierarchically clustered)", fontsize=14, pad=20)
+    plt.xticks(rotation=45, ha="right", fontsize=11)
+    plt.yticks(rotation=0, fontsize=11)
+    plt.tight_layout()
 
     if save_path:
-        g.savefig(save_path, dpi=150, bbox_inches='tight')
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
         print(f"Saved: {save_path}")
 
     plt.show()
-    return g
+    return fig
 
 def plot_pca_2d(vectors, save_path=None):
     """Project emotion vectors to 2D via PCA (should show valence/arousal axes)."""
