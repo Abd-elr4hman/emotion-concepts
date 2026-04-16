@@ -1,0 +1,35 @@
+{
+  "model_name": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "emotions": [
+    "desperate",
+    "calm",
+    "hopeful",
+    "satisfied",
+    "afraid",
+    "loving"
+  ],
+  "topics": [
+    "a job interview",
+    "a first date",
+    "receiving medical news",
+    "a family reunion",
+    "a difficult conversation",
+    "achieving a long-term goal",
+    "losing something valuable",
+    "helping a stranger",
+    "facing a deadline",
+    "making a big decision",
+    "a surprise visit",
+    "a misunderstanding with a friend",
+    "traveling to a new place",
+    "learning a new skill",
+    "a competition",
+    "saying goodbye",
+    "a celebration",
+    "dealing with failure",
+    "an unexpected opportunity",
+    "a quiet moment alone"
+  ],
+  "stories_per_topic": 3,
+  "total_stories_per_emotion": 60
+}
