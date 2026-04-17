@@ -1,9 +1,11 @@
-# Emotion Trajectory Visualizer
+# Emotion Concepts
 
 A proof-of-concept replication of Anthropic's emotion vector methodology for extracting, validating, and visualizing emotional representations in language models.
 
 Based on: [Anthropic Transformer Circuits - Emotions (2026)](https://transformer-circuits.pub/2026/emotions/index.html)
 
+> [!NOTE]
+> Code was mostly coded with claude
 ---
 
 ## What This Does
