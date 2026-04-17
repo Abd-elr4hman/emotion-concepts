@@ -52,7 +52,6 @@ emoj-poc/
 ├── analyze_vectors.py     # Heatmap + PCA visualization
 ├── steering.py            # Validate vectors via causal steering
 ├── trajectory.py          # Generate text with emotion trajectory
-├── debug_steering.py      # Debug vector/hidden state magnitudes
 ├── METHODOLOGY.md         # Implementation decisions traced to paper
 └── data/
     ├── stories/           # Generated emotion stories (per emotion)
@@ -87,6 +86,7 @@ python analyze_vectors.py
 ```
 
 Produces:
+
 - `similarity_heatmap.png` — cosine similarity matrix, hierarchically clustered
 - `pca_2d.png` — emotion vectors projected to 2D
 
@@ -114,16 +114,16 @@ For a detailed mapping of each implementation decision to the Anthropic paper, s
 
 ### Summary of Deviations from Paper
 
-| Aspect | Anthropic | Our PoC | Reason |
-|--------|-----------|---------|--------|
-| Model | Claude Sonnet 4.5 | TinyLlama-1.1B | Faster iteration, local GPU |
-| Emotions | 171 | 18 | Faster generation |
-| Topics | 100 | 20 | Faster generation |
-| Stories/topic | 12 | 3 | Faster generation |
-| Token skip | 50 | 10 | Shorter stories |
-| Steering coeff | 0.5 | 5-15 | Different vector/hidden magnitudes |
-| Story curation | Manual review | None | PoC scope |
-| Neutral corpus | Large dataset | 20 sentences | PoC scope |
+| Aspect         | Anthropic         | Our PoC        | Reason                             |
+| -------------- | ----------------- | -------------- | ---------------------------------- |
+| Model          | Claude Sonnet 4.5 | TinyLlama-1.1B | Faster iteration, local GPU        |
+| Emotions       | 171               | 18             | Faster generation                  |
+| Topics         | 100               | 20             | Faster generation                  |
+| Stories/topic  | 12                | 3              | Faster generation                  |
+| Token skip     | 50                | 10             | Shorter stories                    |
+| Steering coeff | 0.5               | 5-15           | Different vector/hidden magnitudes |
+| Story curation | Manual review     | None           | PoC scope                          |
+| Neutral corpus | Large dataset     | 20 sentences   | PoC scope                          |
 
 Despite these simplifications, we replicate the core findings: meaningful emotion geometry and causal steering effects.
 
@@ -154,6 +154,7 @@ Despite these simplifications, we replicate the core findings: meaningful emotio
 ## Implementation Progress
 
 ### Phase 1: Extract Emotion Vectors
+
 - [x] Generate emotion stories dataset
 - [x] Extract activations from stories
 - [x] Compute emotion vectors (mean - global mean)
@@ -161,11 +162,13 @@ Despite these simplifications, we replicate the core findings: meaningful emotio
 - [x] Save vectors to disk
 
 ### Phase 2: Scoring & Generation
+
 - [x] Implement `score_token()` function
 - [x] Implement `generate_with_emotion_trajectory()`
 - [x] Test on simple prompts, verify vectors activate sensibly
 
 ### Phase 3: Visualization
+
 - [x] Static plot of trajectory (matplotlib)
 - [x] Cosine similarity heatmap with hierarchical clustering
 - [x] PCA 2D projection (valence/arousal axes)
@@ -173,12 +176,14 @@ Despite these simplifications, we replicate the core findings: meaningful emotio
 - [ ] Add token annotations on x-axis
 
 ### Phase 4: Validation & Polish
+
 - [x] Validate with causal steering (steering works at coeff 5-15)
 - [ ] Test on alignment-relevant scenarios (like Anthropic's blackmail case)
 - [ ] Move to larger model
 - [ ] Web UI (Gradio/Streamlit)
 
 ### Refinements
+
 - [ ] Filter emotion word leakage (use stronger model for story generation)
 - [ ] Manual story curation (filter off-target stories)
 - [ ] Multi-layer analysis
