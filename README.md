@@ -40,6 +40,12 @@ python trajectory.py         # Generate with emotion trajectory
 - [ ] Multi-layer analysis
 - [ ] Manual story curation
 
+## Limitations
+
+- TinyLlama doesn't follow "don't use the word X" well — stories leak target emotion words, which means vectors may encode the literal word rather than the underlying concept
+- No manual curation (Anthropic hand-picked stories for quality)
+- Single layer extraction (layer 16 of 22 — ~70% depth where semantic concepts typically emerge) vs multi-layer analysis in paper
+
 ## More Information
 
 For implementation details and methodology decisions, see [METHODOLOGY.md](METHODOLOGY.md).
